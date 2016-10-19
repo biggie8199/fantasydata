@@ -9,7 +9,7 @@ require 'fantasydata/version'
 
 module Fantasydata
   module Default
-    ENDPOINT = 'http://api.nfldata.apiphany.com' unless defined? Fantasydata::Default::ENDPOINT
+    ENDPOINT = 'https://api.fantasydata.net' unless defined? Fantasydata::Default::ENDPOINT
     CONNECTION_OPTIONS = {
       :headers => {
         :accept => 'application/json',
