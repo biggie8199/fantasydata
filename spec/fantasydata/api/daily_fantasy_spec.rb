@@ -45,34 +45,40 @@ describe Fantasydata::API::Fantasy do
     end
   end
 
-  describe '#daily_fantasy_results' do
+  describe '#daily_fantasy_points_for_day' do
     before do
-      stub_get("/nfl/v2/JSON/DailyFantasyPoints/2014-SEP-21").
-      to_return(:body => fixture("daily_fantasy/daily_points.json"),
+      stub_get("/v3/nfl/stats/JSON/DailyFantasyPoints/2016-DEC-11").
+      to_return(:body => fixture("daily_fantasy/daily_points_v3.json"),
                  :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
     it "requests correct resource - pass string" do
-      @client.daily_fantasy_points_for_day('2014-SEP-21')
-      expect(a_get("/nfl/v2/JSON/DailyFantasyPoints/2014-SEP-21")).to have_been_made
+      @client.daily_fantasy_points_for_day('2016-DEC-11')
+      expect(a_get("/v3/nfl/stats/JSON/DailyFantasyPoints/2016-DEC-11")).to have_been_made
     end
 
     it "requests correct resource - pass date" do
-      @client.daily_fantasy_points_for_day(DateTime.parse("2014/09/21"))
-      expect(a_get("/nfl/v2/JSON/DailyFantasyPoints/2014-SEP-21")).to have_been_made
+      @client.daily_fantasy_points_for_day(DateTime.parse("2016/12/11"))
+      expect(a_get("/v3/nfl/stats/JSON/DailyFantasyPoints/2016-DEC-11")).to have_been_made
     end
 
     it "returns player data" do
-      players = @client.daily_fantasy_points_for_day('2014-SEP-21')
+      players = @client.daily_fantasy_points_for_day('2016-DEC-11')
 
       expect(players).to be_an Array
-      expect(players.first.player_id).to eq 2593
-      expect(players.first.name).to eq 'Aaron Rodgers'
-      expect(players.first.fantasy_points).to eq 28.64
+      expect(players.first.player_id).to eq 14967
+      expect(players.first.name).to eq "Le'Veon Bell"
+      expect(players.first.team).to eq 'PIT'
+      expect(players.first.position).to eq 'RB'
+      expect(players.first.fantasy_points).to eq 53.9
+      expect(players.first.fantasy_points_ppr).to eq 58.4
+      expect(players.first.fantasy_points_fan_duel).to eq 56.1
+      expect(players.first.fantasy_points_draft_kings).to eq 61.8
+      expect(players.first.fantasy_points_yahoo).to eq 56.1
       expect(players.first.has_started).to eq true
       expect(players.first.is_in_progress).to eq false
       expect(players.first.is_over).to eq true
-      expect(players.first.date).to eq nil
+      expect(players.first.date).to eq '2016-12-11T13:00:00'
     end
   end
 

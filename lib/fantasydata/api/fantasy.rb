@@ -22,7 +22,7 @@ module Fantasydata
 
       # Get daily fantasy points for a given day.
       #
-      # @see https://developer.fantasydata.com/docs/services/556a892e35491a1d30c7a8ba/operations/556a892f35491a02d05ebf42
+      # @see https://developer.fantasydata.com/docs/services/57a01ec514338d17388660cb/operations/57a01ec514338d0a985480e9
       # @authentication Requires api key
       # @raise [Fantasydata::Error::Unauthorized] Error raised when supplied api key is not valid.
       # @raise [Fantasydata::Error::Unauthorized] Error raised when supplied user credentials are not valid.
@@ -32,7 +32,7 @@ module Fantasydata
       #   Fantasydata.daily_fantasy_for_day('2014-SEP-21')
       def daily_fantasy_points_for_day(day)
         day = convert_to_date(day)
-        objects_from_response(Fantasydata::DailyFantasyPoints, :get, "/nfl/v2/JSON/DailyFantasyPoints/#{day}")
+        objects_from_response(Fantasydata::DailyFantasyPoints, :get, "/v3/nfl/stats/JSON/DailyFantasyPoints/#{day}")
       end
 
       def daily_fantasy_defense_game_stats year, week
