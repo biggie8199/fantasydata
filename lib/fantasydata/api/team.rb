@@ -5,8 +5,8 @@ module Fantasydata
     module Team
       include Fantasydata::API::Utils
 
-      def teams_active
-        objects_from_response(Fantasydata::TeamDetail, :get, "/nfl/v2/JSON/Teams")
+      def teams_active sport=:nfl
+        objects_from_response(Fantasydata::TeamDetail, :get, "/#{sport}/v2/JSON/Teams")
       end
 
       def teams_by_year year
