@@ -5,9 +5,14 @@ module Fantasydata
     module Schedule
       include Fantasydata::API::Utils
 
-      def schedule_by_year year
-        objects_from_response(Fantasydata::Schedule, :get, "/nfl/v2/JSON/Schedules/#{year}")
+      def schedule_by_year sport=:nfl, year
+        if sport == 'mlb'
+          objects_from_response(Fantasydata::Schedule, :get, "/#{sport}/v2/JSON/Games/#{year}")
+        else
+          objects_from_response(Fantasydata::Schedule, :get, "/#{sport}/v2/JSON/Schedules/#{year}")
+        end
       end
+
     end
   end
 end

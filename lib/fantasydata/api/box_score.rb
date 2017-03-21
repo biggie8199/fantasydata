@@ -22,6 +22,10 @@ module Fantasydata
       end
 
 
+      def box_scores_by_date sport=:nfl, date
+        objects_from_response(Fantasydata::BoxScore, :get, "#{sport}/v2/JSON/BoxScores/#{date}")
+      end
+
       # This method returns all box scores for a given season and week.
       #
       # @see https://developer.fantasydata.com/docs/services/556a892e35491a1d30c7a8ba/operations/556a892f35491a02d05ebf41

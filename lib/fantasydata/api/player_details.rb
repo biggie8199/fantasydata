@@ -5,8 +5,8 @@ module Fantasydata
     module PlayerDetails
       include Fantasydata::API::Utils
 
-      def player_details_available
-        objects_from_response(Fantasydata::PlayerDetail, :get, "/nfl/v2/JSON/Players")
+      def player_details_available sport=:nfl
+        objects_from_response(Fantasydata::PlayerDetail, :get, "/#{sport}/v2/JSON/Players")
       end
 
       def player_details_free_agents

@@ -5,6 +5,10 @@ module Fantasydata
     module PlayerStat
       include Fantasydata::API::Utils
 
+      def player_game_stats_by_date sport=:nfl, date
+        objects_from_response(Fantasydata::PlayerGameStat, :get, "/#{sport}/v2/JSON/PlayerGameStatsByDate/#{date}")
+      end
+      
       def player_game_stat_by_player year, week, player_id
         object_from_response(Fantasydata::PlayerGameStat, :get, "/nfl/v2/JSON/PlayerGameStatsByPlayerID/#{year}/#{week}/#{player_id}")
       end
@@ -13,8 +17,8 @@ module Fantasydata
         object_from_response(Fantasydata::PlayerGameStat, :get, "/nfl/v2/JSON/PlayerGameProjectionStatsByPlayerID/#{year}/#{week}/#{player_id}")
       end
 
-      def player_game_stats_by_week_and_team year, week, team_name
-        objects_from_response(Fantasydata::PlayerGameStat, :get, "/nfl/v2/JSON/PlayerGameStatsByTeam/#{year}/#{week}/#{team_name}")
+      def player_game_stats_by_week_and_team sport=:nfl, year, week, team_name
+        objects_from_response(Fantasydata::PlayerGameStat, :get, "/#{sport}/v2/JSON/PlayerGameStatsByTeam/#{year}/#{week}/#{team_name}")
       end
 
       def player_game_stats_by_week_and_team_projection year, week, team_name
