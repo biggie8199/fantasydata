@@ -6,7 +6,8 @@ module Fantasydata
       include Fantasydata::API::Utils
 
       def schedule_by_year sport=:nfl, year
-        if sport == 'mlb'
+        sport = sport.to_sym
+        if sport == :mlb
           objects_from_response(Fantasydata::Schedule, :get, "/#{sport}/v2/JSON/Games/#{year}")
         else
           objects_from_response(Fantasydata::Schedule, :get, "/#{sport}/v2/JSON/Schedules/#{year}")

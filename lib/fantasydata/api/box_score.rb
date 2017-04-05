@@ -23,6 +23,7 @@ module Fantasydata
 
 
       def box_scores_by_date sport=:nfl, date
+        sport = sport.to_sym
         if sport == :nfl
           klass = Fantasydata::BoxScore
         elsif sport == :mlb
